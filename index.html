@@ -65,5 +65,67 @@
     margin: 40px auto 0; /* jarak dari atas + posisi tengah */
     width: 250px;        /* lebar logo */
   }
+  <!-- gsmbar-- >
+   <img src="net.jpg" alt="NetHome ID" class="logo">
+
+  <!-- Slideshow -->
+  <div class="slideshow">
+    <img src="/jpg.html/zte_no.jpg" alt="Foto 1" class="active">
+    <img src="/jpg.html/mercusys.jpg" alt="Foto 2">
+    <img src="/jpg.html/zte_yes.jpg" alt="Foto 3">
+<img src="/jpg.html/TL-WR840N_UN_6_1701937258~2.jpg" alt="Foto 4">
+    <!-- Tombol navigasi -->
+    <button class="nav-btn prev" onclick="prevSlide()">❮</button>
+    <button class="nav-btn next" onclick="nextSlide()">❯</button>
+  </div>
+
+  <!-- Dot navigasi -->
+  <div class="dots">
+    <span class="dot active" onclick="goToSlide(0)"></span>
+    <span class="dot" onclick="goToSlide(1)"></span>
+    <span class="dot" onclick="goToSlide(2)"></span>
+    <span class="dot" onclick="goToSlide(3)"></span>
+    <span class="dot" onclick="goToSlide(4)"></span>
+  </div>
+
+  <script>
+    let slides = document.querySelectorAll(".slideshow img");
+    let dots = document.querySelectorAll(".dot");
+    let index = 0;
+    let slideInterval = setInterval(nextSlide, 3000);
+
+    function showSlide(i) {
+      slides.forEach((slide, idx) => {
+        slide.classList.remove("active");
+        dots[idx].classList.remove("active");
+        if (idx === i) {
+          slide.classList.add("active");
+          dots[idx].classList.add("active");
+        }
+      });
+    }
+
+    function nextSlide() {
+      index = (index + 1) % slides.length;
+      showSlide(index);
+    }
+
+    function prevSlide() {
+      index = (index - 1 + slides.length) % slides.length;
+      showSlide(index);
+    }
+
+    function goToSlide(i) {
+      index = i;
+      showSlide(index);
+    }
+
+    // pause auto slide saat hover
+    document.querySelector(".slideshow").addEventListener("mouseover", () => {
+      clearInterval(slideInterval);
+    });
+    document.querySelector(".slideshow").addEventListener("mouseout", () => {
+      slideInterval = setInterval(nextSlide, 3000);
+    });
 </style>
 </html>
